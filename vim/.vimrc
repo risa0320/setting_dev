@@ -5,6 +5,9 @@ set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 Plugin 'VundleVim/Vundle.vim'
 Plugin 'JuliaEditorSupport/julia-vim'
+Plugin 'vim-airline/vim-airline'
+Plugin 'vim-airline/vim-airline-themes'
+
 
 call vundle#end()
 filetype plugin indent on
@@ -15,6 +18,13 @@ syntax sync minlines=200
 colorscheme molokai
 set t_Co=256 " molokaiにカラーを設定
 set background=dark " 背景色を黒に設定
+
+" vim-airline
+let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#buffer_idx_mode = 1
+"let g:airline_theme='ayu_mirage' "落ち着いた色調が好き
+let g:airline_theme='fruit punch' "落ち着いた色調が好き
+let g:airline_powerline_fonts = 1
 
 set number " 行番号の表示
 set norelativenumber " 相対的な行番号は使わない
@@ -85,7 +95,7 @@ command! -nargs=0 ClipPath call s:Clip(expand'%:p'))
 command! -nargs=0 ClipFile call s:Clip(expand'%:t'))
 command! -nargs=0 ClipDir call s:Clip(expand'%p:h'))
 
-set ttimeoutlen=10 " キーコードシーケンスが終了するまでの時間を短く
+"set ttimeoutlen=10 " キーコードシーケンスが終了するまでの時間を短く
 
 set mouse=a " マウスでの操作を可能に
 
@@ -139,5 +149,4 @@ map <silent> [Tab]n :tabnext<CR>
 map <silent> [Tab]p :tabprevious<CR>
 
 :let g:latex_to_unicode_auto = 1
-
 
