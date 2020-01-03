@@ -1,0 +1,12 @@
+version: '3'
+services:
+  notebook:
+    build: notebook
+    environment:
+      TZ: 'Asia/Tokyo'
+    volumes:
+      - ./julia/data:/home/jovyan/work
+    ports: 
+      - 8888:8888
+    command: /usr/local/bin/start-notebook.sh
+ 
