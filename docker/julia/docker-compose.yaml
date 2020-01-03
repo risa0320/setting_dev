@@ -8,5 +8,3 @@ services:
       - ./julia/data:/home/jovyan/work
     ports: 
       - 8888:8888
-    command: /usr/local/bin/start-notebook.sh
- 
