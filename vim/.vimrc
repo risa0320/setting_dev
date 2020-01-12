@@ -1,30 +1,6 @@
 scriptencoding utf-8
 set nocompatible
 filetype off
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
-Plugin 'VundleVim/Vundle.vim'
-Plugin 'JuliaEditorSupport/julia-vim'
-Plugin 'vim-airline/vim-airline'
-Plugin 'vim-airline/vim-airline-themes'
-
-
-call vundle#end()
-filetype plugin indent on
-
-syntax on " シンタックス設定の有効化
-syntax enable " 構文ハイライトを有効に
-syntax sync minlines=200
-colorscheme molokai
-set t_Co=256 " molokaiにカラーを設定
-set background=dark " 背景色を黒に設定
-
-" vim-airline
-let g:airline#extensions#tabline#enabled = 1
-let g:airline#extensions#tabline#buffer_idx_mode = 1
-"let g:airline_theme='ayu_mirage' "落ち着いた色調が好き
-let g:airline_theme='fruit punch' "落ち着いた色調が好き
-let g:airline_powerline_fonts = 1
 
 set number " 行番号の表示
 set norelativenumber " 相対的な行番号は使わない
@@ -45,7 +21,6 @@ set list
 set listchars=tab:\>\
 
 set autoindent " 自動インデント
-set smartindent " 行末に合わせて自動インデント
 
 set lazyredraw " なんか早くなる
 
@@ -150,3 +125,26 @@ map <silent> [Tab]p :tabprevious<CR>
 
 :let g:latex_to_unicode_auto = 1
 
+" plugin
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+Plugin 'VundleVim/Vundle.vim'
+Plugin 'JuliaEditorSupport/julia-vim'
+Plugin 'vim-airline/vim-airline'
+Plugin 'vim-airline/vim-airline-themes'
+
+call vundle#end()
+filetype plugin indent on
+
+syntax on " シンタックス設定の有効化
+syntax enable " 構文ハイライトを有効に
+syntax sync minlines=200
+colorscheme molokai
+set t_Co=256 " molokaiにカラーを設定
+set background=dark " 背景色を黒に設定
+
+" vim-airline
+let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#buffer_idx_mode = 1
+let g:airline_theme='fruit_punch' "落ち着いた色調が好き
+"let g:airline_powerline_fonts = 1 "これフォントが合わない
