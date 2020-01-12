@@ -86,7 +86,7 @@ function! s:SID_PREFIX()
 endfunction
 "" tablineの設定
 function! s:my_tabline() "{{{
-  let s = ""
+  let s = ''
   for i in range(1, tabpagenr('$'))
     let bufnrs = tabpagebuflist(i)
     let bufnr = bufnrs[tabpagewinnr(i) - 1] " first window, first appears
@@ -98,16 +98,16 @@ function! s:my_tabline() "{{{
     let s .= '%#' . (i == tabpagenr() ? 'TabLineSel' : 'TabLine') . '#'
     let s .= no . ':' . title
     let s .= mod
-    let s .= '%#TabLineFile# '
+    let s .= '%#TabLineFill# '
   endfor
-  let s.= '%#TabLineFile#%T%=%#TabLine#'
+  let s.= '%#TabLineFill#%T%=%#TabLine#'
   return s
 endfunction "}}}
-let &tabline = '%!' . s:SID_PREFIX() . 'my_tabline()'
+let &tabline = '%!'. s:SID_PREFIX() . 'my_tabline()'
 set showtabline=2 " 常にタブラインを表示
 "" The prefix key
 nnoremap [Tag] <Nop>
-nmap t [Tab]
+nmap t [Tag]
 "" tab jump
 "" t2で左から２つ目のタブへジャンプ
 for n in range(1, 9)
@@ -115,13 +115,13 @@ for n in range(1, 9)
 endfor
 "" tab移動
 """ tc 新しいタブを一番右に作成
-map <silent> [Tab]t :tablast <bar> tabnew<CR>
+map <silent> [Tag]t :tablast <bar> tabnew<CR>
 """ tx タブを閉じる
 map <silent> [Tag]x :tabclose<CR>
 """ tn 次のタブへ
-map <silent> [Tab]n :tabnext<CR>
+map <silent> [Tag]n :tabnext<CR>
 """ tp 前のタブへ
-map <silent> [Tab]p :tabprevious<CR>
+map <silent> [Tag]p :tabprevious<CR>
 
 :let g:latex_to_unicode_auto = 1
 
