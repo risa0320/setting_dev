@@ -8,3 +8,4 @@ services:
       - ./julia/data:/home/jovyan/work
     ports: 
       - 8888:8888
+    command: sh -c 'ipython notebook --ip 0.0.0.0 --allow-root'
