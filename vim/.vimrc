@@ -40,11 +40,11 @@ set formatoptions+=mM " 日本語の整形
 set showtabline=2 " タブバーを常に表示
 
 au BufNewFile,bufRead *.dig setf yaml " digdagファイルの設定
-augroup MyPython
-  autocmd!
-  autocmd BufNewFile,BufReadPost *.py setf python
-  autocmd BufNewFile,BufReadPost *.py inoreemap <S-Tab> <C-V><Tab>
-augroup END
+"augroup MyPython
+"  autocmd!
+"  autocmd BufNewFile,BufReadPost *.py setf python
+"  autocmd BufNewFile,BufReadPost *.py inoreemap <S-Tab> <C-V><Tab>
+"augroup END
 set encoding=utf-8 " デフォルトの文字コード
 set fileencoding=utf-8
 set nobackup " バックアップファイル作成しない
@@ -86,7 +86,7 @@ function! s:SID_PREFIX()
 endfunction
 "" tablineの設定
 function! s:my_tabline() "{{{
-  let s = ''
+  let s = ""
   for i in range(1, tabpagenr('$'))
     let bufnrs = tabpagebuflist(i)
     let bufnr = bufnrs[tabpagewinnr(i) - 1] " first window, first appears
@@ -98,16 +98,16 @@ function! s:my_tabline() "{{{
     let s .= '%#' . (i == tabpagenr() ? 'TabLineSel' : 'TabLine') . '#'
     let s .= no . ':' . title
     let s .= mod
-    let s .= '%#TabLineFill# '
+    let s .= '%#TabLineFile# '
   endfor
-  let s.= '%#TabLineFill#%T%=%#TabLine#'
+  let s.= '%#TabLineFile#%T%=%#TabLine#'
   return s
 endfunction "}}}
-let &tabline = '%!'. s:SID_PREFIX() . 'my_tabline()'
+let &tabline = '%!' . s:SID_PREFIX() . 'my_tabline()'
 set showtabline=2 " 常にタブラインを表示
 "" The prefix key
 nnoremap [Tag] <Nop>
-nmap t [Tag]
+nmap t [Tab]
 "" tab jump
 "" t2で左から２つ目のタブへジャンプ
 for n in range(1, 9)
@@ -115,13 +115,13 @@ for n in range(1, 9)
 endfor
 "" tab移動
 """ tc 新しいタブを一番右に作成
-map <silent> [Tag]t :tablast <bar> tabnew<CR>
+map <silent> [Tab]t :tablast <bar> tabnew<CR>
 """ tx タブを閉じる
 map <silent> [Tag]x :tabclose<CR>
 """ tn 次のタブへ
-map <silent> [Tag]n :tabnext<CR>
+map <silent> [Tab]n :tabnext<CR>
 """ tp 前のタブへ
-map <silent> [Tag]p :tabprevious<CR>
+map <silent> [Tab]p :tabprevious<CR>
 
 :let g:latex_to_unicode_auto = 1
 
@@ -132,6 +132,7 @@ Plugin 'VundleVim/Vundle.vim'
 Plugin 'JuliaEditorSupport/julia-vim'
 Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
+Plugin 'davidhalter/jedi-vim'
 
 call vundle#end()
 filetype plugin indent on
@@ -148,3 +149,7 @@ let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#buffer_idx_mode = 1
 let g:airline_theme='fruit_punch' "落ち着いた色調が好き
 "let g:airline_powerline_fonts = 1 "これフォントが合わない
+
+" jedi-vim
+let g:jedi#force_py_version = 3
+"let g:jedi#auto_initialization = 0
