@@ -61,7 +61,7 @@ set colorcolumn=80 " 1行80文字の目安
 set ambiwidth=double " 全角文字をいい感じに
 
 set completeopt=preview
-set clipboard=unnamed
+set clipboard+=unnamed
 function! s:Clip(data)
   let @*=a:data
   echo "clipped: " . a:data
@@ -73,6 +73,15 @@ command! -nargs=0 ClipDir call s:Clip(expand'%p:h'))
 "set ttimeoutlen=10 " キーコードシーケンスが終了するまでの時間を短く
 
 set mouse=a " マウスでの操作を可能に
+
+set helplang=ja,en
+
+" undoの永続化
+if has('persistent_undo')
+    let undo_path = expand('~/.vim/undo')
+    exe 'set undodir=' .. undo_path
+    set undofile
+endif
 
 " カウントアップ
 nnoremap + <C-a>
@@ -125,14 +134,28 @@ map <silent> [Tab]p :tabprevious<CR>
 
 :let g:latex_to_unicode_auto = 1
 
+" LeaderをSpaceキーにマップ
+let g:mapleader = "\<Space>"
+" スペース + wでファイル保存
+nnoremap <Leader>w :w<CR>
+" Escを2回押すとハイライトを消す
+nnoremap <Esc><Esc> :nohlsearch<CR>
+" スペース + . でvimrcを開く
+nnoremap <Leader>. :new ~/.vimrc<CR>
+
 " plugin
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 Plugin 'VundleVim/Vundle.vim'
+Plugin 'vim-jp/vimdoc-ja'
+
 Plugin 'JuliaEditorSupport/julia-vim'
 Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
-Plugin 'davidhalter/jedi-vim'
+Plugin 'tpope/vim-fugitive'
+"Plugin 'ryanoasis/vim-devicons'
+"Plugin 'davidhalter/jedi-vim'
+Plugin 'Yggdroot/LeaderF'
 
 call vundle#end()
 filetype plugin indent on
@@ -145,11 +168,39 @@ set t_Co=256 " molokaiにカラーを設定
 set background=dark " 背景色を黒に設定
 
 " vim-airline
+let g:airline_theme='fruit_punch' "落ち着いた色調が好き
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#buffer_idx_mode = 1
-let g:airline_theme='fruit_punch' "落ち着いた色調が好き
 "let g:airline_powerline_fonts = 1 "これフォントが合わない
+let g:airline#extensions#branch#enabled = 1 " ブランチ名表示
+let g:airline#extensions#readonly#enabled = 1
 
-" jedi-vim
-let g:jedi#force_py_version = 3
-"let g:jedi#auto_initialization = 0
+" タブ番号が小さいので大きくする
+let g:airline#extensions#tabline#buffer_idx_format = {
+    \ '0': '0 ',
+    \ '1': '1 ',
+    \ '2': '2 ',
+    \ '3': '3 ',
+    \ '4': '4 ',
+    \ '5': '5 ',
+    \ '6': '6 ',
+    \ '7': '7 ',
+    \ '8': '8 ',
+    \ '9': '9 '
+    \}
+
+"" jedi-vim
+"let g:jedi#force_py_version = 3
+""let g:jedi#auto_initialization = 0
+
+
+" Yggdroot/LeaderF
+let g:Lf_WindowPosition = 'popup'
+let g:Lf_PreviewInPopup = 1
+
+noremap <leader>fl :<C-U><C-R>=printf("Leaderf line %s", "")<CR><CR>
+" Show icons, icons are shown by default
+let g:Lf_ShowDevIcons = 1
+" For GUI vim, the icon font can be specify like this, for example
+let g:Lf_DevIconsFont = "DroidSansMono Nerd Font Mono"
+set ambiwidth=double
