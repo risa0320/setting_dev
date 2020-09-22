@@ -136,8 +136,12 @@ map <silent> [Tab]p :tabprevious<CR>
 
 " LeaderをSpaceキーにマップ
 let g:mapleader = "\<Space>"
-" スペース + wでファイル保存
+
 nnoremap <Leader>w :w<CR>
+nnoremap <Leader>q :q<CR>
+nnoremap <Leader>qa :qa<CR>
+nnoremap <Leader>wq :wq<CR>
+nnoremap <Leader>wqa :wqa<CR>
 " Escを2回押すとハイライトを消す
 nnoremap <Esc><Esc> :nohlsearch<CR>
 " スペース + . でvimrcを開く
@@ -148,14 +152,16 @@ set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 Plugin 'VundleVim/Vundle.vim'
 Plugin 'vim-jp/vimdoc-ja'
+"Plugin 'ryanoasis/vim-devicons'
 
 Plugin 'JuliaEditorSupport/julia-vim'
 Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
 Plugin 'tpope/vim-fugitive'
-"Plugin 'ryanoasis/vim-devicons'
 "Plugin 'davidhalter/jedi-vim'
 Plugin 'Yggdroot/LeaderF'
+Plugin 'scrooloose/nerdtree'
+"Plugin 'tiagofumo/vim-nerdtree-syntax-highlight'
 
 call vundle#end()
 filetype plugin indent on
@@ -204,3 +210,7 @@ let g:Lf_ShowDevIcons = 1
 " For GUI vim, the icon font can be specify like this, for example
 let g:Lf_DevIconsFont = "DroidSansMono Nerd Font Mono"
 set ambiwidth=double
+
+" 起動時に自動で実行するもの
+autocmd vimenter * NERDTree
+let NERDTreeShowHidden=1 " 隠しファイルを表示
