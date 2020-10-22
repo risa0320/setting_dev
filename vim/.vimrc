@@ -18,7 +18,7 @@ set expandtab " tab -> space
 set softtabstop=4 " tabをspaceいくつにするか
 set shiftwidth=4
 set list
-set listchars=tab:\>\,trail:~
+set listchars=tab:\>\,trail:_
 
 set autoindent " 自動インデント
 
