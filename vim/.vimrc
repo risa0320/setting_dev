@@ -1,4 +1,5 @@
 scriptencoding utf-8
+set encoding=utf-8 " デフォルトの文字コード
 set nocompatible
 filetype off
 
@@ -18,7 +19,7 @@ set expandtab " tab -> space
 set softtabstop=4 " tabをspaceいくつにするか
 set shiftwidth=4
 set list
-set listchars=tab:\>\,trail:~
+" set listchars=tab:>,trail:~
 
 set autoindent " 自動インデント
 
@@ -45,7 +46,6 @@ au BufNewFile,bufRead *.dig setf yaml " digdagファイルの設定
 "  autocmd BufNewFile,BufReadPost *.py setf python
 "  autocmd BufNewFile,BufReadPost *.py inoreemap <S-Tab> <C-V><Tab>
 "augroup END
-set encoding=utf-8 " デフォルトの文字コード
 set fileencoding=utf-8
 set nobackup " バックアップファイル作成しない
 set noswapfile " スワップファイルを作成しない
@@ -162,6 +162,12 @@ Plugin 'tpope/vim-fugitive'
 Plugin 'Yggdroot/LeaderF'
 Plugin 'scrooloose/nerdtree'
 "Plugin 'tiagofumo/vim-nerdtree-syntax-highlight'
+" python language server
+Plugin 'prabirshrestha/vim-lsp'
+Plugin 'mattn/vim-lsp-settings'
+" https://github.com/mattn/vim-lsp-settings
+Plugin 'prabirshrestha/asyncomplete.vim'
+Plugin 'prabirshrestha/asyncomplete-lsp.vim'
 
 call vundle#end()
 filetype plugin indent on
