@@ -168,6 +168,7 @@ Plugin 'mattn/vim-lsp-settings'
 " https://github.com/mattn/vim-lsp-settings
 Plugin 'prabirshrestha/asyncomplete.vim'
 Plugin 'prabirshrestha/asyncomplete-lsp.vim'
+Plugin 'scrooloose/syntastic'
 
 call vundle#end()
 filetype plugin indent on
@@ -207,15 +208,35 @@ let g:airline#extensions#tabline#buffer_idx_format = {
 
 
 " Yggdroot/LeaderF
-let g:Lf_WindowPosition = 'popup'
+let g:Lf_WindowPosition = 'bottom'
 let g:Lf_PreviewInPopup = 1
+let g:Lf_WorkingDirectoryMode = 'a'
 
 noremap <leader>fl :<C-U><C-R>=printf("Leaderf line %s", "")<CR><CR>
+" noremap <leader>grep :<C-U><C-R>=printf("Leaderf! rg -e %s", expand("<cword>"))<CR>
+" xnoremap gf :<C-U><C-R>=printf("Leaderf! rg -F -e %s", leaderf#Rg#visual())<CR>
+" noremap go :<C-U>Leaderf! rg --recall<CR>
+" nnoremap <leader>g :<C-U>Leaderf! rg --match-path -e ""<Left>
+nnoremap <silent>gr :<C-U><C-R>=printf('Leaderf! rg --match-path -e "%s" -w -F', expand('<cword>'))<CR><CR>
 " Show icons, icons are shown by default
 let g:Lf_ShowDevIcons = 1
 " For GUI vim, the icon font can be specify like this, for example
 let g:Lf_DevIconsFont = "DroidSansMono Nerd Font Mono"
 set ambiwidth=double
+
+" Plugin 'scrooloose/syntastic'
+let g:syntastic_enable_signs = 1
+" ファイルを開いた時と閉じる時に構文エラーチェックを実行する
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 1
+" js用
+let g:syntastic_javascript_checkers = ['eslint']
+" python用
+let g:syntastic_python_checkers = ['pep8', 'pyflakes']
+" 構文チェックを行う場合
+let g:syntastic_mode_map = { 'mode': 'passive',
+                           \ 'active_filetypes': ['javascript', 'python'],
+                           \ 'passive_filetypes': [] }
 
 " 起動時に自動で実行するもの
 autocmd vimenter * NERDTree
