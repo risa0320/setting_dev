@@ -35,6 +35,7 @@ set wildmenu " コマンドラインモードの補完
 set cmdheight=2
 set showcmd " 入力中のコマンドを表示
 set shellcmdflag=-ic " コマンドラインでもaliasが使えるように
+set shell=/bin/bash " bashに変更
 
 set formatoptions+=mM " 日本語の整形
 
